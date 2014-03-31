@@ -4,5 +4,7 @@
 %p
   Twitter: #{@user.twitter}
 %p
+  Birthdate: #{@user.birthdate}
+%p
   Email: #{@user.email if @user.email}
 = link_to 'Edit account', edit_user_path
