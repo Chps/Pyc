@@ -11,16 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20140401194015) do
-=======
-ActiveRecord::Schema.define(version: 20140401193152) do
->>>>>>> 8c2f3e09a1e7b91d8f3be47f5e34985f5aa03c41
+ActiveRecord::Schema.define(version: 20140401200834) do
 
   create_table "images", force: true do |t|
     t.string   "caption"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "content_file_name"
+    t.string   "content_content_type"
+    t.integer  "content_file_size"
+    t.datetime "content_updated_at"
   end
 
   create_table "users", force: true do |t|

@@ -11,4 +11,9 @@ class Image < ActiveRecord::Base
     },
     :dropbox_visibility => 'public',
     :dropbox_options => {}
+
+  validates :content, :attachment_presence => true
+  validates_with AttachmentPresenceValidator, :attributes => :content
+  validates_attachment_content_type :content, :content_type => ["image/jpg", "image/jpeg", "image/png"]
+
 end
