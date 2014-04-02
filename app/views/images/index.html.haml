@@ -2,7 +2,7 @@
 %ul
   - @images.each do |image|
     %li
-      =link_to image.caption do
+      =link_to image do
         =image_tag image.content.url
         =link_to image.caption, image
 
