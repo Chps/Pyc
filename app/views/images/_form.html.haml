@@ -1,0 +1,9 @@
+= simple_form_for(@image) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :caption
+    = f.input :content
+
+  .form-actions
+    = f.button :submit

@@ -1,0 +1,11 @@
+%h1 Images
+%ul
+  - @images.each do |image|
+    %li
+      =link_to image do
+        =image_tag image.content.url :medium
+        =link_to image.caption, image
+
+%br
+
+= link_to 'New Image', new_image_path

@@ -1,0 +1,9 @@
+%p#notice= notice
+
+%p
+  %b Caption:
+  = @image.caption
+%p= image_tag @image.content.url
+= link_to 'Edit', edit_image_path(@image)
+\|
+= link_to 'Back', images_path
