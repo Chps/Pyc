@@ -10,5 +10,14 @@ class Image < ActiveRecord::Base
         access_type: "app_folder"
     },
     :dropbox_visibility => 'public',
-    :dropbox_options => {}
+    :dropbox_options => {},
+    :styles => {
+                 :medium => "300x300>",
+                 :thumb => "100x100>"
+                }
+
+  validates :content, :attachment_presence => true
+  validates_with AttachmentPresenceValidator, :attributes => :content
+  validates_attachment_content_type :content, :content_type => ["image/jpg", "image/jpeg", "image/png"]
+
 end
