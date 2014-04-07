@@ -11,3 +11,9 @@
  *= require_self
  *= require_tree .
  */
+.home-imgs img {
+  height: 200px;
+  width: auto;
+  max-width: 500px;
+  padding: 20px;
+}
