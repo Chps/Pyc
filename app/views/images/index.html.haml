@@ -1,4 +1,10 @@
 %h1 Images
+
+%h3 Tag cloud:
+%div.tag_cloud
+  - tag_cloud Image.tag_counts, %w[small med large] do |tag, css_class|
+    = link_to tag.name, tag_path(tag.name), class: css_class
+
 %ul
   - @images.each do |image|
     %li
