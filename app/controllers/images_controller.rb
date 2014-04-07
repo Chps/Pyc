@@ -4,7 +4,11 @@ class ImagesController < ApplicationController
   # GET /images
   # GET /images.json
   def index
-    @images = Image.all
+    if params[:tag]
+      @images = Image.tagged_with(params[:tag])
+    else
+      @images = Image.all
+    end
   end
 
   # GET /images/1
