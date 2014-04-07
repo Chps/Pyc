@@ -3,7 +3,13 @@
 %p
   %b Caption:
   = @image.caption
+
 %p= image_tag @image.content.url
+
+%p
+  %b Tags:
+  = @image.tag_list
+
 = link_to 'Edit', edit_image_path(@image)
 \|
 = link_to 'Back', images_path

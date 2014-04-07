@@ -18,6 +18,8 @@ class Image < ActiveRecord::Base
         :thumb => "100x100>"
     }
 
+  acts_as_taggable
+
   validates :content, :attachment_presence => true
   validates_with AttachmentPresenceValidator, :attributes => :content
   validates_attachment_content_type :content, :content_type => ["image/jpg", "image/jpeg", "image/png"]
