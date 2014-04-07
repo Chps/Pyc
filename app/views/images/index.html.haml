@@ -1,17 +1,10 @@
-%h1 Images
-
-%h3 Tag cloud:
-%div.tag_cloud
-  - tag_cloud Image.tag_counts, %w[small med large] do |tag, css_class|
-    = link_to tag.name, tag_path(tag.name), class: css_class
-
-%ul
-  - @images.each do |image|
-    %li
-      =link_to image do
-        =image_tag image.content.url :medium
-        =link_to image.caption, image
-
-%br
-
-= link_to 'New Image', new_image_path
+.row
+  .col-md-9.home-imgs
+    -@images.each do |image|
+      .col-md-2
+        =link_to image do
+          =image_tag image.content.url :medium
+  .col-md-3
+    %div.tag_cloud
+      - tag_cloud Image.tag_counts, %w[small med large] do |tag, css_class|
+        = link_to tag.name, tag_path(tag.name), class: css_class
