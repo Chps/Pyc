@@ -23,4 +23,5 @@ class Image < ActiveRecord::Base
   validates :content, :attachment_presence => true
   validates_with AttachmentPresenceValidator, :attributes => :content
   validates_attachment_content_type :content, :content_type => ["image/jpg", "image/jpeg", "image/png"]
+  belongs_to :user
 end
