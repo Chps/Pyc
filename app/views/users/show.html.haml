@@ -10,3 +10,9 @@
 %p
   Email: #{@user.email if @user.email}
 = link_to 'Edit account', edit_user_path
+%div
+.row
+  -@user.images.each do |image|
+    .col-md-6
+      =link_to image do
+        =image_tag image.content.url :medium

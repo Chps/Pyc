@@ -18,9 +18,9 @@ gem 'thin'
 gem "paperclip", "~> 4.1"
 gem "paperclip-dropbox", ">= 1.1.7"
 gem 'acts-as-taggable-on'
+gem 'binding_of_caller'
 group :development do
   gem 'better_errors'
-  gem 'binding_of_caller', :platforms=>[:mri_19, :mri_20, :rbx]
   gem 'html2haml'
   gem 'quiet_assets'
   gem 'rails_layout'

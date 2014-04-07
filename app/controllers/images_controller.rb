@@ -29,7 +29,8 @@ class ImagesController < ApplicationController
   # POST /images.json
   def create
     @image = Image.new(image_params)
-
+    puts current_user if user_signed_in?
+    @image.user = current_user if user_signed_in?
     respond_to do |format|
       if @image.save
         format.html { redirect_to @image, notice: 'Image was successfully created.' }
