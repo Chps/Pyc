@@ -24,4 +24,15 @@ class Image < ActiveRecord::Base
   validates_with AttachmentPresenceValidator, :attributes => :content
   validates_attachment_content_type :content, :content_type => ["image/jpg", "image/jpeg", "image/png"]
   belongs_to :user
+
+
+  def to_jq_upload
+    {
+      "name" => read_attribute(:upload_file_name),
+      "size" => read_attribute(:upload_file_size),
+      "url" => upload.url(:original),
+      "delete_url" => upload_path(self),
+      "delete_type" => "DELETE"
+    }
+  end
 end

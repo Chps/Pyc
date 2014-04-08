@@ -19,6 +19,7 @@ gem "paperclip", "~> 4.1"
 gem "paperclip-dropbox", ">= 1.1.7"
 gem 'acts-as-taggable-on'
 gem 'binding_of_caller'
+gem 'jquery-fileupload-rails'
 group :development do
   gem 'better_errors'
   gem 'html2haml'
