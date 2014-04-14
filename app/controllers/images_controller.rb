@@ -2,6 +2,9 @@ class ImagesController < ApplicationController
   before_action :set_image, only: [:show, :edit, :update, :destroy]
   before_filter :user_must_be_signed_in, :except => [:index, :show]
   before_filter :image_user_must_be_current_user, :except => [:index, :show]
+  
+  impressionist actions: [:show] #, unique: [:session_hash]
+  
   # GET /images
   # GET /images.json
   def index
@@ -78,3 +81,4 @@ class ImagesController < ApplicationController
       params.require(:image).permit(:caption, :content_file_name, :content, :tag_list)
     end
 end
+
