@@ -15,6 +15,8 @@
 = link_to 'Delete', image_path, :method => :delete
 \|
 = link_to 'Back', images_path
+%p
+  posted by: #{@user.name}
 
 %p
   views: #{@image.impressionist_count}
