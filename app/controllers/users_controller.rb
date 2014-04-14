@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!
-
+  impressionist actions: [:show] #, unique: [:session_hash]
   def index
     @users = User.all
   end

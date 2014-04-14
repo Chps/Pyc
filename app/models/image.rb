@@ -1,4 +1,5 @@
 class Image < ActiveRecord::Base
+  is_impressionable
   has_attached_file :content,
     :path => ":hash.:extension",
     :hash_secret => "1ae8a70b-d9af-4359-a155-ffeccb95482f",
