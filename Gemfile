@@ -15,6 +15,7 @@ gem 'sendgrid'
 gem 'simple_form'
 gem 'therubyracer', :platform=>:ruby
 gem 'thin'
+gem 'impressionist'
 gem "paperclip", "~> 4.1"
 gem "paperclip-dropbox", ">= 1.1.7"
 gem 'acts-as-taggable-on'
