@@ -1,5 +1,5 @@
 $(function () {
-  $('#new_image').fileupload({
+  $('#global-upload').fileupload({
     uploadTemplateId: null,
     downloadTemplateId: null,
     add: function(e, data) {
