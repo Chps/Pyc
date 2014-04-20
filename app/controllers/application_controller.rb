@@ -18,10 +18,10 @@ class ApplicationController < ActionController::Base
       end
     end
     crumbs.each_with_index do |c, i|
-      if c[:label] == "Images"
+      if c[:label] == "Images" and crumbs[i+1] and crumbs[i+1][:label].is_number?
         img = Image.find crumbs[i+1][:label].to_i
         crumbs[i+1] = {label: img.caption, path: image_url(img)}
-      elsif c[:label] == "Users"
+      elsif c[:label] == "Users" and crumbs[i+1]  and crumbs[i+1][:label].is_number?
         usr = User.find crumbs[i+1][:label].to_i
         crumbs[i+1] = {label: usr.name, path: user_url(usr)}
       end
