@@ -10,23 +10,20 @@ class ApplicationController < ActionController::Base
   helper_method :breadcrumbs
   def breadcrumbs
     crumbs = []
-    # Find the indices of each '/' in the url.
-    indices = request.fullpath.enum_for(:scan, /\//)
-    indices = indices.map { Regexp.last_match.begin(0) }
-    indices.push(request.fullpath.length - 1) unless indices.length == 1
-    indices.each do |i|
-      path = request.fullpath[0, i + 1]
-      if path == '/'
+    request.fullpath.split("/").each do |segment|
+      if crumbs.empty?
         crumbs << {label: "Home", path: root_url}
       else
-        crumbs << {label: path.split("/").last.humanize, path: path}
+        crumbs << {label: segment.humanize, path: crumbs.last[:path] + segment + '/'}
       end
     end
     crumbs.each_with_index do |c, i|
       if c[:label] == "Images"
-        crumbs[i+1][:label] = Image.find(crumbs[i+1][:label].to_i).caption
+        img = Image.find crumbs[i+1][:label].to_i
+        crumbs[i+1] = {label: img.caption, path: image_url(img)}
       elsif c[:label] == "Users"
-        crumbs[i+1][:label] = User.find(crumbs[i+1][:label].to_i).name
+        usr = User.find crumbs[i+1][:label].to_i
+        crumbs[i+1] = {label: usr.name, path: user_url(usr)}
       end
     end
     crumbs
