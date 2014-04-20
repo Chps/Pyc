@@ -1,1 +1,4 @@
-%li= link_to 'Upload', new_image_path
+%li
+  %button.btn.btn-info.navbar-btn#upload-btn Upload
+  = simple_form_for Image.new, html: { id: "global-form" } do |f|
+    = f.input :content

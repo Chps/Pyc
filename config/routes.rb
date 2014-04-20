@@ -1,5 +1,5 @@
 Imgx::Application.routes.draw do
-  resources :images
+  resources :images, except: [:new]
 
   root :to => "home#index"
   devise_for :users, :controllers => {:registrations => "registrations"}

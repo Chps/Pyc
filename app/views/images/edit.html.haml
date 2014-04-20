@@ -2,6 +2,8 @@
 
 = render 'form'
 
+%p= image_tag @image.content.url
+
 = link_to 'Show', @image
 \|
 = link_to 'Back', images_path
