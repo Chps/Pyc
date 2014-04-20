@@ -12,7 +12,7 @@
     %header
       = render 'layouts/navigation'
     %main{:role => "main"}
-      = render 'layouts/breadcrumb'
+      = render 'layouts/breadcrumb' if not hide_breadcrumbs?
       .container
         = render 'layouts/messages'
         = yield
