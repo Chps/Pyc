@@ -1,14 +1,4 @@
--# Find the indices of each '/' in the url.
-- indices = request.fullpath.enum_for(:scan, /\//)
-- indices = indices.map { Regexp.last_match.begin(0) }
-- indices.push(request.fullpath.length - 1) unless indices.length == 1
-
 -# Construct the breadcrumb.
 %ol.breadcrumb#url-breadcrumb
-  - indices.each do |i|
-    - path = request.fullpath[0, i + 1]
-    %li
-      - if path == '/'
-        = link_to "Home", path
-      - else
-        = link_to path.split("/").last.humanize, path
+  -breadcrumbs.each do |b|
+    %li= link_to b[:label], b[:path]

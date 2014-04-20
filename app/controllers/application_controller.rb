@@ -7,6 +7,24 @@ class ApplicationController < ActionController::Base
   helper_method :image_user_is_current_user?
   helper_method :user_is_current_user?
   helper_method :hide_breadcrumbs?
+  helper_method :breadcrumbs
+  def breadcrumbs
+    crumbs = []
+    # Find the indices of each '/' in the url.
+    indices = request.fullpath.enum_for(:scan, /\//)
+    indices = indices.map { Regexp.last_match.begin(0) }
+    indices.push(request.fullpath.length - 1) unless indices.length == 1
+    indices.each do |i|
+      path = request.fullpath[0, i + 1]
+      if path == '/'
+        crumbs << {label: "Home", path: root_url}
+      else
+        crumbs << {label: path.split("/").last.humanize, path: path}
+      end
+    end
+    crumbs
+  end
+
   private
    def user_must_be_signed_in
      redirect_to new_user_session_path, alert: "You must sign in to access this page" unless current_user
