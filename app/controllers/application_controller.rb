@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   helper_method :user_must_be_signed_in
   helper_method :image_user_must_be_current_user
   helper_method :image_user_is_current_user?
+  helper_method :user_is_current_user?
   private
    def user_must_be_signed_in
      redirect_to new_user_session_path, alert: "You must sign in to access this page" unless current_user
@@ -21,5 +22,8 @@ class ApplicationController < ActionController::Base
      return true if not params[:id]
      @image ||= Image.find(params[:id])
      current_user == @image.user
+   end
+   def user_is_current_user?
+     current_user == @user
    end
 end

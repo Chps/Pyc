@@ -5,7 +5,7 @@
   Twitter: #{@user.twitter}
 %p
   Birthdate: #{@user.birthdate}
-= link_to 'Edit account', edit_user_path if image_user_is_current_user?
+= link_to 'Edit account', edit_user_path if user_is_current_user?
 %div
 .row
   -@user.images.each do |image|
