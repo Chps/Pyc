@@ -18,15 +18,19 @@ class ApplicationController < ActionController::Base
       end
     end
     crumbs.each_with_index do |c, i|
-      if c[:label] == "Images" and crumbs[i+1] and crumbs[i+1][:label].is_number?
+      if checkSpecialCase crumbs, "Images", c, i
         img = Image.find crumbs[i+1][:label].to_i
         crumbs[i+1] = {label: img.caption, path: image_url(img)}
-      elsif c[:label] == "Users" and crumbs[i+1]  and crumbs[i+1][:label].is_number?
+      elsif checkSpecialCase crumbs, "Users", c, i
         usr = User.find crumbs[i+1][:label].to_i
         crumbs[i+1] = {label: usr.name, path: user_url(usr)}
       end
     end
     crumbs
+  end
+
+  def checkSpecialCase(crumbs, type, crumb, index)
+    crumb[:label] == type and crumbs[index+1] and crumbs[index+1][:label].is_number?
   end
 
   private
