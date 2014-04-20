@@ -22,6 +22,13 @@ class ApplicationController < ActionController::Base
         crumbs << {label: path.split("/").last.humanize, path: path}
       end
     end
+    crumbs.each_with_index do |c, i|
+      if c[:label] == "Images"
+        crumbs[i+1][:label] = Image.find(crumbs[i+1][:label].to_i).caption
+      elsif c[:label] == "Users"
+        crumbs[i+1][:label] = User.find(crumbs[i+1][:label].to_i).name
+      end
+    end
     crumbs
   end
 
