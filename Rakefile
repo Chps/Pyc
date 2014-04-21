@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Imgx::Application.load_tasks
+Pyc::Application.load_tasks
