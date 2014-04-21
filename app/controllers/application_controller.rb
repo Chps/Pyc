@@ -22,11 +22,6 @@ class ApplicationController < ActionController::Base
       redirect_to new_user_session_path, alert: "You must sign in to access this page" unless current_user
     end
 
-    def authenticate_user!
-      if !current_user
-        redirect_to root_url, :alert => 'You need to sign in for access to this page.'
-      end
-    end
     def image_user_must_be_current_user
       redirect_to root_url, :alert => 'Access denied.' unless image_user_is_current_user?
     end
