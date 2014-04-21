@@ -1,4 +1,5 @@
 class Image < ActiveRecord::Base
+ 
   before_validation :default_values
 
   is_impressionable
