@@ -11,6 +11,7 @@
 
 %center
   = will_paginate(@images)
-  %p
-    - tag_images_count(@images, params[:tag])
+  - if params[:tag]
+    %p
+      - tag_images_count(@images, params[:tag]) if params[:tag]
   %p Content Hits: #{@hits}
