@@ -1,5 +1,8 @@
 class Image < ActiveRecord::Base
+  before_validation :default_values
+
   is_impressionable
+
   has_attached_file :content,
     :path => ":hash.:extension",
     :hash_secret => "1ae8a70b-d9af-4359-a155-ffeccb95482f",
@@ -24,16 +27,10 @@ class Image < ActiveRecord::Base
   validates :content, :attachment_presence => true
   validates_with AttachmentPresenceValidator, :attributes => :content
   validates_attachment_content_type :content, :content_type => ["image/jpg", "image/jpeg", "image/png"]
+  validates :caption, presence: true
   belongs_to :user
 
-
-  def to_jq_upload
-    {
-      "name" => read_attribute(:upload_file_name),
-      "size" => read_attribute(:upload_file_size),
-      "url" => upload.url(:original),
-      "delete_url" => upload_path(self),
-      "delete_type" => "DELETE"
-    }
+  def default_values
+    self.caption ||= "My Pyc"
   end
 end
