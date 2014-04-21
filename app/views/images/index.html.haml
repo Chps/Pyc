@@ -8,9 +8,10 @@
     %div.tag_cloud
       - tag_cloud Image.tag_counts, %w[small med large] do |tag, css_class|
         = link_to tag.name, tag_path(tag.name), class: css_class
-		
 
 %center
   = will_paginate(@images)
   %p
-    #{@amtTagged} images with tag #{params[:tag]}
+    - if params[:tag]
+      #{@images.length} images with tag #{params[:tag]}
+  %p Content Hits: #{@hits}

@@ -1,7 +1,7 @@
 Pyc::Application.routes.draw do
   resources :images, except: [:new]
 
-  root :to => "home#index"
+  root to: "images#index"
   devise_for :users, :controllers => {:registrations => "registrations"}
   resources :users, except: [:edit]
   get 'tags/:tag', to: 'images#index', as: :tag
