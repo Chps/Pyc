@@ -6,24 +6,6 @@ class ApplicationController < ActionController::Base
   helper_method :image_user_must_be_current_user
   helper_method :image_user_is_current_user?
   helper_method :user_is_current_user?
-  helper_method :hide_breadcrumbs?
-  helper_method :breadcrumbs
-
-  def breadcrumbs
-    crumbs = [ { label: "Home", path: root_url } ]
-    full_path = request.fullpath
-    full_path.split("/")[1..-1].each do |segment|
-      if segment != 'images'
-        label = segment.humanize
-        path = crumbs.last[:path] + segment + '/'
-        crumbs << {label: label, path: path }
-      end
-    end
-
-    type = (full_path.include? "images") ? :image : :user
-
-    crumbs.map! { |map| !map[:label].is_number? ? map : convert(map, type) }
-  end
 
   private
     def convert(map, type)
@@ -57,9 +39,5 @@ class ApplicationController < ActionController::Base
 
     def user_is_current_user?
       current_user == @user
-    end
-
-    def hide_breadcrumbs?
-      params[:action] == "index" && params[:controller] == "home"
     end
 end
