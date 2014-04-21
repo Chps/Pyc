@@ -8,12 +8,12 @@ class ImagesController < ApplicationController
   # GET /images
   # GET /images.json
   def index
+    @hits = Impression.count('id')
     if params[:tag]
       @images = Image.tagged_with(params[:tag])
       @images = @images.paginate(page: params[:page], per_page: 10)
 	  else
 	    @images =  Image.paginate(page: params[:page], per_page: 10)
-      @hits = Impression.count('id')
     end
   end
 
