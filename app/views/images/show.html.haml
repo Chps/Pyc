@@ -1,19 +1,20 @@
 %p#notice= notice
+.col-md-9
+  %p= image_tag @image.content.url
+.col-md-3.well
+  %h2= @image.caption
+  %p
+    %b Tags:
+    = render partial: 'tag', collection: @image.tag_list
+  -if image_user_is_current_user?
+    = link_to 'Edit', edit_image_path(@image)
+    \|
+    = link_to 'Delete', image_path, :method => :delete
+  %p
+    Posted by:
+    = link_to "#{@user.name}", user_path(@image.user_id)
+  %p
+    #{@image.impressionist_count} views
+  %p
+    =link_to "Download", "#", class: "btn btn-info"
 
-%h2= @image.caption
-
-%p= image_tag @image.content.url
-
-%p
-  %b Tags:
-  = render partial: 'tag', collection: @image.tag_list
--if image_user_is_current_user?
-  = link_to 'Edit', edit_image_path(@image)
-  \|
-  = link_to 'Delete', image_path, :method => :delete
-%p
-  posted by: 
-  = link_to "#{@user.name}", user_path(@image.user_id)
-
-%p
-  views: #{@image.impressionist_count}
