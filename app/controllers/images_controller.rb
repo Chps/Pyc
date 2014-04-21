@@ -10,7 +10,11 @@ class ImagesController < ApplicationController
   def index
     if params[:tag]
       @images = Image.tagged_with(params[:tag])
-    else
+	  @hits = 0;
+	  @images.each do |img|
+		@hits += img.impressionist_count
+	  end
+	else
       @images = Image.all
     end
   end
