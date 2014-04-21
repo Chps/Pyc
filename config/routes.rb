@@ -3,6 +3,10 @@ Pyc::Application.routes.draw do
 
   root :to => "home#index"
   devise_for :users, :controllers => {:registrations => "registrations"}
-  resources :users
+  resources :users, except: [:edit]
   get 'tags/:tag', to: 'images#index', as: :tag
+
+  # Redirect all unknown paths to root
+  # This must remain at the bottom
+  get '*path' => redirect('/')
 end
