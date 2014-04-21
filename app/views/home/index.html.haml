@@ -1,3 +1,4 @@
+
 .row
   .col-md-9.home-imgs
     -@images.each do |image|
@@ -9,5 +10,8 @@
       - tag_cloud Image.tag_counts, %w[small med large] do |tag, css_class|
         = link_to tag.name, tag_path(tag.name), class: css_class
 		
-%p
-  Image Page Views: #{@hits}
+
+%center 
+  = will_paginate(@images)
+  %p
+    Content Hits: #{@hits}

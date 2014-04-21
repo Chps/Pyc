@@ -16,6 +16,7 @@ gem 'simple_form'
 gem 'therubyracer', :platform=>:ruby
 gem 'thin'
 gem 'impressionist'
+gem 'will_paginate', '~> 3.0'
 gem "paperclip", "~> 4.1"
 gem "paperclip-dropbox", ">= 1.1.7"
 gem 'acts-as-taggable-on'

@@ -9,9 +9,15 @@ class ImagesController < ApplicationController
   # GET /images.json
   def index
     if params[:tag]
-      @images = Image.tagged_with(params[:tag])
-    else
-      @images = Image.all
+
+	  @images =  Image.paginate(:page => params[:page], :per_page => 4)
+	  @images =  @images.tagged_with(params[:tag])
+	  @amtTagged = @images.tagged_with(params[:tag]).count()
+	  @hits = 0;
+	else
+      @images =  Image.all
+	  @amountReturned = @images.size
+	  @images =  Image.paginate(:page => params[:page], :per_page => 4)
     end
   end
 
