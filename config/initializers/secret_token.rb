@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Imgx::Application.config.secret_key_base = '22e47a7f3eec68aa8aa3a72fedd8c5746c6e949541faaadb97b8d251235852b02cbf68a67693ceeb9dc6fd033a282d3c15294a1fb66b2e8eba8e50a1a9eb4bc7'
+Pyc::Application.config.secret_key_base = '22e47a7f3eec68aa8aa3a72fedd8c5746c6e949541faaadb97b8d251235852b02cbf68a67693ceeb9dc6fd033a282d3c15294a1fb66b2e8eba8e50a1a9eb4bc7'

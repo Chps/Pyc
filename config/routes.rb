@@ -1,4 +1,4 @@
-Imgx::Application.routes.draw do
+Pyc::Application.routes.draw do
   resources :images, except: [:new]
 
   root :to => "home#index"
