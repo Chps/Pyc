@@ -1,9 +1,12 @@
-%h1 Editing image
+.col-md-9
+	%p= image_tag @image.content.url
+.col-md-3.well
+	%h1 Editing image
 
-= render 'form'
+	= render 'form'
 
-%p= image_tag @image.content.url
+	
 
-= link_to 'Show', @image
-\|
-= link_to 'Back', images_path
+	= link_to 'Show', @image
+	\|
+	= link_to 'Back', images_path
