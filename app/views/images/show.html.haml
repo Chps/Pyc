@@ -16,5 +16,5 @@
   %p
     #{@image.impressionist_count} views
   %p
-    =link_to "Download", "#", class: "btn btn-info"
+    =link_to "Download", @image.content.url, class: "btn btn-info"
 
