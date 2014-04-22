@@ -1,5 +1,6 @@
 Pyc::Application.routes.draw do
   resources :images, except: [:new]
+  get 'images/:id/download', to: 'images#download', as: :download
 
   root to: "images#index"
   devise_for :users, :controllers => {:registrations => "registrations"}

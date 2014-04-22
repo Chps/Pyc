@@ -66,6 +66,14 @@ class ImagesController < ApplicationController
     end
   end
 
+  def download
+    send_data(
+      open(@image.content.url).read,
+      filename: @image.content_file_name,
+      type:     @image.content_content_type
+    )
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_image
