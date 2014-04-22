@@ -8,16 +8,6 @@ class ApplicationController < ActionController::Base
   helper_method :user_is_current_user?
 
   private
-    def convert(map, type)
-      if type == :image
-        image = Image.find map[:label].to_i
-        return { label: image.caption, path: image_url(image) }
-      else
-        user = User.find map[:label].to_i
-        return { label: user.name, path: user_url(user) }
-      end
-    end
-
     def user_must_be_signed_in
       redirect_to new_user_session_path, alert: "You must sign in to access this page" unless current_user
     end
