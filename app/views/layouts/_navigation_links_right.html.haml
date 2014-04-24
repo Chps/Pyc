@@ -1,3 +1,4 @@
+%li= render 'layouts/navigation_search'
 -if user_signed_in?
   %li= link_to 'Account', "/users/#{current_user.id}"
   %li= link_to 'Logout', destroy_user_session_path, :method=>'delete', :class =>'btn btn-info'
