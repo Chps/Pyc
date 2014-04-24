@@ -1,5 +1,9 @@
 class Image < ActiveRecord::Base
- 
+
+  def self.search(query)
+    where("caption like ?", "%#{query}%")
+  end
+
   before_validation :default_values
 
   is_impressionable

@@ -11,10 +11,13 @@ class ImagesController < ApplicationController
     @hits = Impression.count('id')
     if params[:tag]
       @images = Image.tagged_with(params[:tag])
-      @images = @images.paginate(page: params[:page], per_page: 10)
-	  else
-	    @images =  Image.paginate(page: params[:page], per_page: 10)
+    elsif params[:image_caption]
+      @images = Image.search(params[:image_caption])
+    else
+      @images = Image.all
     end
+
+    @images = @images.paginate(page: params[:page], per_page: 10)
   end
 
   # GET /images/1
