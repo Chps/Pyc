@@ -2,5 +2,21 @@
   %h1
     =@user.name
     %small User Statistics
-  %hr
+
+.panel-group#statistics-accordion
+  .panel.panel-default
+    .panel-heading
+      %h4.panel-title
+        %a{:data => {:toggle => "collapse", :parent => "#statistics-accordion"}, :href => "#global-stats"} Global Statistics
+    .panel-collapse.collapse.in#global-stats
+      .panel-body
+        %p Possibly a breakdown of view locations, the data contained in impressions, etc.
+
+  .panel.panel-default
+    .panel-heading
+      %h4.panel-title
+        %a{:data => {:toggle => "collapse", :parent => "#statistics-accordion"}, :href => "#image-stats"} Image Statistics
+    .panel-collapse.collapse#image-stats
+      .panel-body
+        %p Etc
 
