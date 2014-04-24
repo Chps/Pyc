@@ -9,7 +9,7 @@ module ImagesHelper
       "Download",
       download_image_path(image),
       target: '_blank',
-      class:  'btn btn-info'
+      class:  'btn btn-primary'
     )
   end
 end
