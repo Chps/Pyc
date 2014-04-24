@@ -1,4 +1,5 @@
-%li
-  %button.btn.btn-info.navbar-btn#upload-btn Upload
-  = simple_form_for Image.new, html: { id: "global-form" } do |f|
-    = f.input :content
+- if user_signed_in?
+  %li
+    %button.btn.btn-info.navbar-btn#upload-btn Upload
+    = simple_form_for Image.new, html: { id: "global-form" } do |f|
+      = f.input :content
