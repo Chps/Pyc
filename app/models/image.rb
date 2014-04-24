@@ -1,7 +1,7 @@
 class Image < ActiveRecord::Base
 
   def self.search(query)
-    where("caption like ?", "%#{query}%")
+    where("lower(caption) like ?", "%#{query.downcase}%")
   end
 
   before_validation :default_values
