@@ -1,10 +1,28 @@
-// Place all the styles related to the images controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "bootstrap";
+
 .tag_cloud {
   line-height: 1.6em;
   margin: 20px 0px;
   .small { font-size: 0.8em; }
   .med { font-size: 1.2em; }
   .large { font-size: 1.8em; }
+}
+
+.comments {
+  list-style-type: none;
+  padding: 0px;
+  margin: 10px 0px 0px;
+  li {
+    padding: 10px 0px;
+    border-top: 1px solid #e8e8e8;
+  }
+}
+
+.content {
+  font-size: 20px;
+  display: block;
+}
+
+.timestamp {
+  color: $gray-light;
 }

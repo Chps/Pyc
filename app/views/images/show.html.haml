@@ -1,4 +1,3 @@
-%p#notice= notice
 .col-md-9
   %p= image_tag @image.content.url
 .col-md-3.well
@@ -17,3 +16,11 @@
     #{@image.impressionist_count} views
   %p
     = download_link(@image)
+.col-md-9
+  = render 'comment_form', image_id: @image.id
+  - if @image.comments.any?
+    %h3
+      Comments
+    %ol.comments
+      = render @comments
+    = will_paginate @comments

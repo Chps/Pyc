@@ -8,6 +8,7 @@ Pyc::Application.routes.draw do
   root to: "images#index"
   devise_for :users, :controllers => {:registrations => "registrations"}
   resources :users, except: [:edit]
+  resources :comments, only: [:create]
   get 'tags/:tag', to: 'images#index', as: :tag
 
   # Redirect all unknown paths to root
