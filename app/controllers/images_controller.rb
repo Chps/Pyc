@@ -25,6 +25,7 @@ class ImagesController < ApplicationController
   def show
     @user = User.find(@image.user_id)
     @comments = @image.comments.paginate(page: params[:page])
+    @comment = Comment.new
   end
 
   # GET /images/1/edit
