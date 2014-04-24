@@ -1,0 +1,7 @@
+%li
+  %span.content= comment.content
+  %span.timestamp
+    Posted
+    = time_ago_in_words(comment.created_at)
+    ago by
+    = link_to comment.user.name, comment.user

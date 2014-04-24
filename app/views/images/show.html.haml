@@ -17,3 +17,10 @@
     #{@image.impressionist_count} views
   %p
     = download_link(@image)
+.col-md-9
+  - if @image.comments.any?
+    %h3
+      Comments
+    %ol.comments
+      = render @comments
+    = will_paginate @comments
