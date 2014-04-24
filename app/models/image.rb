@@ -33,7 +33,9 @@ class Image < ActiveRecord::Base
   validates_with AttachmentPresenceValidator, :attributes => :content
   validates_attachment_content_type :content, :content_type => ["image/jpg", "image/jpeg", "image/png"]
   validates :caption, presence: true
+
   belongs_to :user
+  has_many :comments, dependent: :destroy
 
   def default_values
     self.caption ||= "My Pyc"
