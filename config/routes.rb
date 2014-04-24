@@ -7,13 +7,14 @@ Pyc::Application.routes.draw do
     end
   end
 
-  resources :users, except: [:edit] do
+  devise_for :users, :controllers => {:registrations => "registrations"}
+
+  resources :users, only: [:index, :show] do
     member do
       get :statistics
     end
   end
 
-  devise_for :users, :controllers => {:registrations => "registrations"}
   resources :comments, only: [:create]
   get '/tags/:tag', to: 'images#index', as: :tag
 
