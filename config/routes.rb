@@ -10,6 +10,7 @@ Pyc::Application.routes.draw do
   resources :users, except: [:edit]
   resources :comments, only: [:create]
   get 'tags/:tag', to: 'images#index', as: :tag
+  get '/users/:id/statistics', to: 'users#statistics', as: :statistics
 
   # Redirect all unknown paths to root
   # This must remain at the bottom

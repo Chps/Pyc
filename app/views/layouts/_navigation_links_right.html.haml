@@ -6,6 +6,7 @@
       %b.caret
     %ul.dropdown-menu
       %li= link_to 'Profile', current_user
+      %li= link_to 'Statistics', "/users/#{current_user.id}/statistics"
       %li= link_to 'Settings', "/users/edit"
       %li.divider
       %li= link_to 'Logout', destroy_user_session_path, :method=>'delete'

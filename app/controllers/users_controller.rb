@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   impressionist actions: [:show] #, unique: [:session_hash]
+
   def index
     @users = User.all
   end
@@ -8,4 +9,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def statistics
+    @user = User.find(params[:id])
+  end
 end
