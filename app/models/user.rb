@@ -6,5 +6,12 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   has_many :images
   has_many :comments, dependent: :destroy
+
+  # impressions made by this user
   has_many :impressions
+
+  # impressions on this user
+  def views
+    Impression.where( "impressionable_type = 'User' and impressionable_id = ?", id)
+  end
 end

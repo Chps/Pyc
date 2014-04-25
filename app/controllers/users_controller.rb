@@ -11,9 +11,6 @@ class UsersController < ApplicationController
 
   def statistics
     @user = User.find(params[:id])
-    @impressions = Impression.where(
-        "impressionable_type = 'User' and impressionable_id = ?",
-        @user.id
-        ).group(:user_id)
+    @impressions = @user.views.group(:user_id)
   end
 end
