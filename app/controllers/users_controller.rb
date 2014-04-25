@@ -11,6 +11,6 @@ class UsersController < ApplicationController
 
   def statistics
     @user = User.find(params[:id])
-    @impressions = @user.views.group(:user_id)
+    @impressions = @user.views(select: 'user_id').group(:user_id)
   end
 end
