@@ -15,20 +15,23 @@ class UsersController < ApplicationController
 
     views = @user.views_by_day
     if !views.empty?
-      @view_chart = views_chart(views.keys, views.values, '400x300')
+      values = views.values
+      @view_chart = views_chart(views.keys, values, values.max.round(-1),
+                                5, '400x300')
     end
   end
 
   private
-    def views_chart(keys, values, size)
+    def views_chart(keys, values, max, steps, size)
       x_labels = keys.map { |date| date.to_date.to_s(:short) }.sort
-      y_range = [0, values.max, values.max / 5.0]
+      y_range = [0, max, max / steps]
       Gchart.line(
         size:             size,
         data:             values,
         axis_with_labels: 'x,y',
-        axis_labels:      [x_labels],
-        axis_range:       [nil, y_range]
+        axis_labels:      [x_labels, nil],
+        axis_range:       [nil, y_range],
+        max_value:        max
       )
     end
 end

@@ -1,6 +1,4 @@
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
   is_impressionable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
@@ -18,6 +16,7 @@ class User < ActiveRecord::Base
   end
 
   def views_by_day
-    views(select: 'distinct created_at').group('DATE(created_at)').count
+    created_at = 'DATE(created_at)'
+    views(select: created_at).group(created_at).order(created_at).count
   end
 end
