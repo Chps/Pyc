@@ -11,6 +11,8 @@
  *= require_self
  *= require_tree .
  */
+ @import "bootstrap";
+
 .home-imgs img {
   height: 200px;
   width: auto;
@@ -20,6 +22,21 @@
 
 .home-img {
   float: left;
+}
+
+.comments {
+  list-style-type: none;
+  padding: 0px;
+  margin: 10px 0px 0px;
+  border-top: 1px solid #e8e8e8;
+  li {
+    padding: 10px 0px;
+    border-bottom: 1px solid #e8e8e8;
+  }
+}
+
+.timestamp {
+  color: $gray-light;
 }
 
 #url-breadcrumb {

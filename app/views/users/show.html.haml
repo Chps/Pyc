@@ -1,18 +1,23 @@
-%h3 #{@user.name}
-= gravatar_for @user, size: 100
-%p
-  Bio: #{@user.bio}
-%p
-  Twitter: #{@user.twitter}
-%p
-  Birthdate: #{@user.birthdate}
-= link_to 'Edit account', edit_user_registration_path if user_is_current_user?
-%div
-.row
-  -@user.images.each do |image|
-    .col-md-6
-      =link_to image do
-        =image_tag image.content.url :medium
+.col-md-2.well
+  .profile-preference
+    = link_to 'Images', user_path(@user, pref: 'images')
+  %hr
+  .profile-preference
+    = link_to 'Comments', user_path(@user, pref: 'comments')
+.col-md-7
+  - if params[:pref] == 'images'
+    .profile-imgs
+      - @user.images.each do |image|
+        = link_to image do
+          = image_tag image.content.url :medium
+  - else
+    %ol.comments
+      = render @user.comments, image_page: false
 
-%p
-  views: #{@user.impressionist_count}
+.col-md-3.well
+  %h2.user-header #{@user.name}
+  = gravatar_for @user, size: 100
+  %p Bio: #{@user.bio}
+  %p Twitter: #{@user.twitter}
+  %p Birthdate: #{@user.birthdate}
+  %p Views: #{@user.impressionist_count}

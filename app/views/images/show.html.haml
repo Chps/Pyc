@@ -22,5 +22,5 @@
     %h3
       Comments
     %ol.comments
-      = render @comments
+      = render @comments, image_page: true
     = will_paginate @comments
