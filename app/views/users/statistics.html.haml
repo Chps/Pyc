@@ -13,9 +13,9 @@
       - if @view_chart
         %h3 Views this month:
         = image_tag @view_chart if @view_chart
-      - if !@impressions.empty?
+      - if !@user.visitors.empty?
         %h3 Users who have visited this profile:
-        = render @impressions
+        = render @user.visitors
 
   .panel.panel-default
     .panel-heading
