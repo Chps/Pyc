@@ -1,7 +1,10 @@
 class ImagesController < ApplicationController
-  before_action :set_image, only: [:show, :edit, :update, :destroy]
-  before_filter :user_must_be_signed_in, :except => [:index, :show]
-  before_filter :image_user_must_be_current_user, :except => [:index, :show]
+  before_action :set_image, except: [:index, :create]
+  before_filter :user_must_be_signed_in, only: [:create, :update, :destroy, :edit]
+  before_filter(
+    :image_user_must_be_current_user,
+    only: [:create, :update, :edit, :destroy]
+  )
 
   impressionist actions: [:show] #, unique: [:session_hash]
 
