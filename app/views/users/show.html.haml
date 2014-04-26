@@ -5,19 +5,23 @@
   .profile-preference
     = link_to 'Comments', user_path(@user, pref: 'comments')
 .col-md-7
-  - if params[:pref] == 'images'
+  - if params[:pref] == 'comments'
+    %ol.comments
+      = render @user.comments, image_page: false
+  - else
     .profile-imgs
       - @user.images.each do |image|
         = link_to image do
           = image_tag image.content.url :medium
-  - else
-    %ol.comments
-      = render @user.comments, image_page: false
 
 .col-md-3.well
   %h2.user-header #{@user.name}
   = gravatar_for @user, size: 100
-  %p Bio: #{@user.bio}
-  %p Twitter: #{@user.twitter}
-  %p Birthdate: #{@user.birthdate}
+  %p #{@user.bio}
+  %p
+    Twitter:
+    = link_to @user.twitter, "https://twitter.com/#{@user.twitter}"
+  %p
+    Birthdate:
+    = @user.birthdate.to_formatted_s(:long) if @user.birthdate
   %p Views: #{@user.impressionist_count}
