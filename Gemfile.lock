@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/mattetti/googlecharts.git
+  revision: b0f9d44cf8c8dcfc521661e02036b73306041e75
+  specs:
+    googlecharts (1.6.8)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -209,6 +215,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   devise
   figaro
+  googlecharts!
   haml-rails
   html2haml
   impressionist

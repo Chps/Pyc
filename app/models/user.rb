@@ -16,4 +16,8 @@ class User < ActiveRecord::Base
       .select(options[:select])
       .where( "impressionable_type = 'User' and impressionable_id = ?", id)
   end
+
+  def views_by_day
+    views(select: 'distinct created_at').group('DATE(created_at)').count
+  end
 end
