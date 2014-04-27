@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     visits = @user.visits_by_day.to_a
     visits.map! { |a| [a[0].to_date.to_s(:short), a[1]] }
 
-    options = { width: 500, heigth: 200, is3D: true }
+    options = { width: 500, height: 200, is3D: true }
 
     @visits_chart = LineChart.new(visits_data(visits), options)
 
@@ -42,7 +42,7 @@ class UsersController < ApplicationController
       data = DataTable.new
       data.new_column('string', 'Country')
       data.new_column('number', 'Visits')
-      data.add_rows(visits.to_a)
+      data.add_rows(visits)
       data
     end
 end
