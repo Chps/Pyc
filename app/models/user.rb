@@ -9,8 +9,16 @@ class User < ActiveRecord::Base
     impressions.select(:user_id).group(:user_id)
   end
 
-  def views_by_day
+  def visits_by_day
     created_at = 'DATE(created_at)'
     impressions.select(created_at).group(created_at).order(created_at).count
+  end
+
+  def visits_by_country
+    impressions.joins( 'INNER JOIN users ON user_id = users.id')
+      .select(:country)
+      .where('users.country IS NOT NULL')
+      .group(:country)
+      .count
   end
 end

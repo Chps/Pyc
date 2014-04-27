@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  include UsersHelper
+
   impressionist actions: [:show] #, unique: [:session_hash]
 
   def index
@@ -12,17 +14,25 @@ class UsersController < ApplicationController
   def statistics
     @user = User.find(params[:id])
 
-    views = @user.views_by_day
-    if !views.empty?
-      values = views.values
+    visits = @user.visits_by_day
+    if !visits.empty?
+      values = visits.values
       steps = values.max > 5 ? 5 : values.max
-      @view_chart = views_chart(views.keys, values, values.max.round_up,
-                                steps, '400x300')
+      @visits_chart = visits_line_chart(visits.keys, values, values.max.round_up,
+                                        steps, '500x200')
+    end
+
+    visits_by_country = @user.visits_by_country
+    if !visits_by_country.empty?
+      keys = visits_by_country.keys.map { |key| country_name(key) }
+      values = visits_by_country.values
+      labels = values.map { |val| (val * 100.0 / values.sum).round(2).to_s + '%' }
+      @country_pie_chart = country_pie_chart(keys, values, labels, '500x200')
     end
   end
 
   private
-    def views_chart(keys, values, max, steps, size)
+    def visits_line_chart(keys, values, max, steps, size)
       x_labels = keys.map { |date| date.to_date.to_s(:short) }
       y_range = [0, max, max / steps]
       Gchart.line(
@@ -32,6 +42,15 @@ class UsersController < ApplicationController
         axis_labels:      [x_labels, nil],
         axis_range:       [nil, y_range],
         max_value:        max
+      )
+    end
+
+    def country_pie_chart(keys, values, labels, size)
+      Gchart.pie_3d(
+        size:   size,
+        data:   values,
+        legend: keys,
+        labels: labels
       )
     end
 end

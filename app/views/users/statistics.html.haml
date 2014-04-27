@@ -10,9 +10,12 @@
         %a{:data => {:toggle => "collapse", :parent => "#statistics-accordion"}, :href => "#global-stats"} Global Statistics
     .panel-collapse.collapse.in#global-stats
       .panel-body
-      - if @view_chart
-        %h3 Views this month:
-        = image_tag @view_chart if @view_chart
+      - if @visits_chart
+        %h3 Visits this month:
+        = image_tag @visits_chart
+      - if @country_pie_chart
+        %h3 Visits by country:
+        = image_tag @country_pie_chart
       - if !@user.visitors.empty?
         %h3 Users who have visited this profile:
         = render @user.visitors
