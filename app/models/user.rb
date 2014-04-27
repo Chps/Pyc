@@ -25,30 +25,38 @@ class User < ActiveRecord::Base
   def visits_by_age
 	ages = Array.new(8) { Array.new(2) }
 	ages[0][1] = impressions.joins( 'INNER JOIN users ON user_id = users.id')
-		.where("? > 0 AND ? < 13", age(birthdate), age(birthdate))
+		.where("users.birthdate BETWEEN ? AND ?", Date.today - 13.years-1.days, Date.today)
 		.count
+	ages[0][0] = "<13"
+	ages[1][1] = impressions.joins( 'INNER JOIN users ON user_id = users.id')
+		.where("users.birthdate BETWEEN ? AND ?", Date.today - 18.years-1.days, Date.today-13.years)
+		.count
+	ages[1][0] = "13-17"
 	ages[2][1] = impressions.joins( 'INNER JOIN users ON user_id = users.id')
-		.where("? >=13 AND ? < 18", age(birthdate), age(birthdate))
+		.where("users.birthdate BETWEEN ? AND ?", Date.today - 25.years-1.days, Date.today-18.years)
 		.count
+	ages[2][0] = "18-24"
 	ages[3][1] = impressions.joins( 'INNER JOIN users ON user_id = users.id')
-		.where("? >=18 AND ? < 25", age(birthdate), age(birthdate))
+		.where("users.birthdate BETWEEN ? AND ?", Date.today - 35.years-1.days, Date.today-25.years)
 		.count
+	ages[3][0] = "25-34"
 	ages[4][1] = impressions.joins( 'INNER JOIN users ON user_id = users.id')
-		.where("? >=25 AND ? < 35", age(birthdate), age(birthdate))
+		.where("users.birthdate BETWEEN ? AND ?", Date.today - 45.years-1.days, Date.today-35.years)
 		.count
+	ages[4][0] = "35-44"
 	ages[5][1] = impressions.joins( 'INNER JOIN users ON user_id = users.id')
-		.where("? >=35 AND ? < 45", age(birthdate), age(birthdate))
+		.where("users.birthdate BETWEEN ? AND ?", Date.today - 55.years-1.days, Date.today-45.years)
 		.count
-	ages[5][1] = impressions.joins( 'INNER JOIN users ON user_id = users.id')
-		.where("? >=45 AND ? < 55", age(birthdate), age(birthdate))
-		.count
+	ages[5][0] = "45-54"
 	ages[6][1] = impressions.joins( 'INNER JOIN users ON user_id = users.id')
-		.where("? >=55 AND ? < 65", age(birthdate), age(birthdate))
+		.where("users.birthdate BETWEEN ? AND ?", Date.today - 65.years-1.days, Date.today-55.years)
 		.count
+	ages[6][0] = "55-64"
 	ages[7][1] = impressions.joins( 'INNER JOIN users ON user_id = users.id')
-		.where("? >=65", age(birthdate))
+		.where("users.birthdate < ?", Date.today - 65.years)
 		.count
-		
+	ages[7][0] = ">65"
+	
 	ages
   end
   

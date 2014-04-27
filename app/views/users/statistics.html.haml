@@ -16,6 +16,9 @@
         %h3 Visits by country:
         #visits_by_country
           = render_chart @country_pie_chart, 'visits_by_country'
+        %h3 Visits by age:
+        #visits_by_age
+          = render_chart @age_pie_chart, 'visits_by_age'
         %h3 Users who have visited this profile:
         = render @user.visitors
 
