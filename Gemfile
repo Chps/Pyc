@@ -22,6 +22,7 @@ gem 'acts-as-taggable-on'
 gem 'binding_of_caller'
 gem 'jquery-fileupload-rails'
 gem 'googlecharts', github: 'mattetti/googlecharts'
+gem 'carmen-rails'
 
 group :development do
   gem 'sqlite3'

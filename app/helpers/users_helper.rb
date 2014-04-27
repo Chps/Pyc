@@ -5,4 +5,8 @@ module UsersHelper
     gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}?s=#{size}"
     image_tag(gravatar_url, alt: user.name, class: "gravatar")
   end
+
+  def country_name(code)
+    Carmen::Country.coded(code).name
+  end
 end

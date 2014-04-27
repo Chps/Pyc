@@ -46,6 +46,11 @@ GEM
     bootstrap-sass (3.1.1.1)
       sass (~> 3.2)
     builder (3.1.4)
+    carmen (1.0.1)
+      unicode_utils (~> 1.4.0)
+    carmen-rails (1.0.1)
+      carmen (~> 1.0.0)
+      rails
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.4)
@@ -199,6 +204,7 @@ GEM
     uglifier (2.5.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    unicode_utils (1.4.0)
     warden (1.2.3)
       rack (>= 1.0)
     will_paginate (3.0.5)
@@ -212,6 +218,7 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bootstrap-sass
+  carmen-rails
   coffee-rails (~> 4.0.0)
   devise
   figaro
