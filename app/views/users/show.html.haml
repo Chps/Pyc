@@ -25,3 +25,6 @@
     Birthdate:
     = @user.birthdate.to_formatted_s(:long) if @user.birthdate
   %p Views: #{@user.impressionist_count}
+  %p
+    Country:
+    = @user.country.to_formatted_s(:long) if @user.country
