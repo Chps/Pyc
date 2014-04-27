@@ -19,7 +19,6 @@ class UsersController < ApplicationController
     visits = @user.visits_by_day.to_a
     visits.map! { |a| [a[0].to_date.to_s(:short), a[1]] }
 
-	puts visits
 	
     options = { width: 500, height: 200, is3D: true }
 
