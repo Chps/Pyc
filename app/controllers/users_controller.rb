@@ -24,9 +24,12 @@ class UsersController < ApplicationController
     @visits_chart = LineChart.new(visits_data(visits), options)
 
     visits_by_country = @user.visits_by_country.to_a
+	
     visits_by_country.map! { |a| [country_name(a[0]), a[1]] }
 
     @country_pie_chart = PieChart.new(country_data(visits_by_country), options)
+	
+	puts @user.visits_by_age
   end
 
   private

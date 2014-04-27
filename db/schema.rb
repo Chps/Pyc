@@ -23,6 +23,16 @@ ActiveRecord::Schema.define(version: 20140427013606) do
 
   add_index "comments", ["created_at"], name: "index_comments_on_created_at"
 
+  create_table "hitcounters", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "homes", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "images", force: true do |t|
     t.string   "caption"
     t.datetime "created_at"
