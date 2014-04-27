@@ -13,7 +13,7 @@
     Posted by:
     = link_to "#{@user.name}", user_path(@image.user_id)
   %p
-    #{@image.impressionist_count} views
+    = pluralize(@image.impressionist_count, 'view')
   %p
     = download_link(@image)
 .col-md-9

@@ -11,7 +11,7 @@ class ImagesController < ApplicationController
   # GET /images
   # GET /images.json
   def index
-    @hits = Impression.count('id')
+    @hits = Impression.image_impressions.count
     if params[:tag]
       @images = Image.tagged_with(params[:tag])
     elsif params[:image_caption]
