@@ -6,6 +6,7 @@
     %meta{:name => "description", :content => "#{content_for?(:description) ? yield(:description) : 'Pyc'}"}
     = stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true
     = javascript_include_tag "application", "data-turbolinks-track" => true
+    = javascript_include_tag 'http://google.com/jsapi'
     = csrf_meta_tags
     = stylesheet_link_tag "theme", media: "all", "data-turbolinks-track" => true
   %body

@@ -21,7 +21,7 @@ gem "paperclip-dropbox", ">= 1.1.7"
 gem 'acts-as-taggable-on'
 gem 'binding_of_caller'
 gem 'jquery-fileupload-rails'
-gem 'googlecharts', github: 'mattetti/googlecharts'
+gem 'google_visualr'
 gem 'carmen-rails'
 
 group :development do

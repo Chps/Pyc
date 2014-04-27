@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   include UsersHelper
+  include GoogleVisualr
+  include GoogleVisualr::Interactive
 
   impressionist actions: [:show] #, unique: [:session_hash]
 
@@ -14,43 +16,33 @@ class UsersController < ApplicationController
   def statistics
     @user = User.find(params[:id])
 
-    visits = @user.visits_by_day
-    if !visits.empty?
-      values = visits.values
-      steps = values.max > 5 ? 5 : values.max
-      @visits_chart = visits_line_chart(visits.keys, values, values.max.round_up,
-                                        steps, '500x200')
-    end
+    visits = @user.visits_by_day.to_a
+    visits.map! { |a| [a[0].to_date.to_s(:short), a[1]] }
 
-    visits_by_country = @user.visits_by_country
-    if !visits_by_country.empty?
-      keys = visits_by_country.keys.map { |key| country_name(key) }
-      values = visits_by_country.values
-      labels = values.map { |val| (val * 100.0 / values.sum).round(2).to_s + '%' }
-      @country_pie_chart = country_pie_chart(keys, values, labels, '500x200')
-    end
+    options = { width: 500, heigth: 200, is3D: true }
+
+    @visits_chart = LineChart.new(visits_data(visits), options)
+
+    visits_by_country = @user.visits_by_country.to_a
+    visits_by_country.map! { |a| [country_name(a[0]), a[1]] }
+
+    @country_pie_chart = PieChart.new(country_data(visits_by_country), options)
   end
 
   private
-    def visits_line_chart(keys, values, max, steps, size)
-      x_labels = keys.map { |date| date.to_date.to_s(:short) }
-      y_range = [0, max, max / steps]
-      Gchart.line(
-        size:             size,
-        data:             values,
-        axis_with_labels: 'x,y',
-        axis_labels:      [x_labels, nil],
-        axis_range:       [nil, y_range],
-        max_value:        max
-      )
+    def visits_data(visits)
+      data = DataTable.new
+      data.new_column('string', 'Date')
+      data.new_column('number', 'Visits')
+      data.add_rows(visits)
+      data
     end
 
-    def country_pie_chart(keys, values, labels, size)
-      Gchart.pie_3d(
-        size:   size,
-        data:   values,
-        legend: keys,
-        labels: labels
-      )
+    def country_data(visits)
+      data = DataTable.new
+      data.new_column('string', 'Country')
+      data.new_column('number', 'Visits')
+      data.add_rows(visits.to_a)
+      data
     end
 end
