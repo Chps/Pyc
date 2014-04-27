@@ -1,15 +1,26 @@
-%h2
-  Edit #{resource_name.to_s.humanize}
-= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => 'form-vertical' }) do |f|
-  = f.error_notification
-  = display_base_errors resource
-  = f.input :name, :autofocus => true
-  = f.input :email, :required => true
-  = f.input :password, :autocomplete => "off", :hint => "leave it blank if you don't want to change it", :required => false
-  = f.input :password_confirmation, :required => false
-  = f.input :current_password, :hint => "we need your current password to confirm your changes", :required => true
-  = f.button :submit, 'Update', :class => 'btn-primary'
-%h3 Cancel my account
-%p
-  Unhappy? #{link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete}.
-= link_to "Back", :back
+.authform
+  %h3 Edit #{resource_name.to_s.humanize}
+  = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'form-vertical' }) do |f|
+    = devise_error_messages!
+    .form-group
+      = f.input :name, autofocus: true, input_html: { class: 'form-control' }
+      = f.input :bio, maxlength: 500, input_html: { class: 'form-control' }
+      = f.input :twitter, input_html: { class: 'form-control' }
+      = f.label :country
+      = f.country_select :country, { object: f.object, priority: ['US'] }, class: 'form-control'
+      = f.input :birthdate, as: :date, start_year: Time.now.year - 90, input_html: { class: 'form-control' }
+    .form-group
+      = f.input :email, input_html: { class: 'form-control' }
+    %fieldset
+      %p Leave these blank if you don't want to change your password.
+      = f.input :password, input_html: { class: 'form-control', autocomplete: :off }
+      = f.input :password_confirmation, input_html: { class: 'form-control' }
+    %fieldset
+      %p You must enter your current pasword to make changes.
+      = f.input :current_password, required: true, input_html: { class: 'form-control' }
+    = f.button :submit, 'Update', class: 'btn btn-primary'
+.authform
+  %h3 Cancel my account
+  %p Unhappy?
+  = simple_form_for(resource, url: registration_path(resource_name), method: :delete) do |f|
+    = f.button :submit, 'Delete my account', class: 'btn btn-primary'
