@@ -1,9 +1,11 @@
 class ImagesController < ApplicationController
+  include StatisticsHelper
+
   before_action :set_image, except: [:index, :create]
-  before_filter :user_must_be_signed_in, only: [:create, :update, :destroy, :edit]
+  before_filter :user_must_be_signed_in, except: [:index, :download, :show]
   before_filter(
     :image_user_must_be_current_user,
-    only: [:create, :update, :edit, :destroy]
+    except: [:index, :show, :download]
   )
 
   impressionist actions: [:show] #, unique: [:session_hash]
@@ -82,6 +84,12 @@ class ImagesController < ApplicationController
     )
   end
 
+  def statistics
+    options = { width: 500, height: 200, is3D: true }
+
+    @visits_chart = visits_line_chart(@image.visits_by_day, options)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_image
@@ -93,4 +101,3 @@ class ImagesController < ApplicationController
       params.require(:image).permit(:caption, :content_file_name, :content, :tag_list)
     end
 end
-

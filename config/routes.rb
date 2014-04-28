@@ -4,6 +4,7 @@ Pyc::Application.routes.draw do
   resources :images, except: [:new] do
     member do
       get :download
+      get :statistics
     end
   end
 

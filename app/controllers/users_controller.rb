@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   include UsersHelper
+  include StatisticsHelper
   include GoogleVisualr
   include GoogleVisualr::Interactive
 
@@ -16,12 +17,9 @@ class UsersController < ApplicationController
   def statistics
     @user = User.find(params[:id])
 
-    visits = @user.visits_by_day.to_a
-    visits.map! { |a| [a[0].to_date.to_s(:short), a[1]] }
-
     options = { width: 500, height: 200, is3D: true }
 
-    @visits_chart = LineChart.new(visits_data(visits), options)
+    @visits_chart = visits_line_chart(@user.visits_by_day, options)
 
     visits_by_country = @user.visits_by_country.to_a
     visits_by_country.map! { |a| [country_name(a[0]), a[1]] }
@@ -34,14 +32,6 @@ class UsersController < ApplicationController
   end
 
   private
-    def visits_data(visits)
-      data = DataTable.new
-      data.new_column('string', 'Date')
-      data.new_column('number', 'Visits')
-      data.add_rows(visits)
-      data
-    end
-
     def country_data(visits)
       data = DataTable.new
       data.new_column('string', 'Country')

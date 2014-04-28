@@ -1,0 +1,8 @@
+.page-header
+  %h1
+    = @image.caption
+    %small Image Statistics
+
+%h3 Visits this month:
+#visits
+  = render_chart @visits_chart, 'visits'
