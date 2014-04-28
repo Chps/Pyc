@@ -8,9 +8,9 @@
       = f.input :twitter, input_html: { class: 'form-control' }
 
       = f.label :country
-      = f.country_select :country, { object: f.object, priority: ['US'] }, class: 'form-control'
+      = country_helper f
 
-      = f.input :birthdate, start_year: Time.now.year - 90, order: [:month, :day, :year], input_html: { class: 'form-control' }
+      = birthdate_helper f
     .form-group
       = f.input :email, input_html: { class: 'form-control' }
     %fieldset

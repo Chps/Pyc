@@ -23,8 +23,8 @@
     = link_to @user.twitter, "https://twitter.com/#{@user.twitter}" if @user.twitter
   %p
     Birthdate:
-    = @user.birthdate.to_s(:long) if @user.birthdate
+    = @user.birthdate.to_s(:long) unless @user.birthdate.blank?
   %p
     Country:
-    = country_name(@user.country) if @user.country
+    = country_name(@user.country) unless @user.country.blank?
   %p Views: #{@user.impressionist_count}

@@ -9,4 +9,28 @@ module UsersHelper
   def country_name(code)
     Carmen::Country.coded(code).name
   end
+
+  def country_helper(f)
+    f.country_select(
+      :country,
+      {
+        object:         f.object,
+        priority:       ['US'],
+        prompt:         'Select country',
+        include_blank:  true
+      },
+      class: 'form-control'
+    )
+  end
+
+  def birthdate_helper(f)
+    f.input(
+      :birthdate,
+      start_year: 90.years.ago.year,
+      end_year:   Time.now.year,
+      prompt:     'Select date of birth',
+      order:      [:month, :day, :year],
+      input_html: { class: 'form-control' }
+    )
+  end
 end
