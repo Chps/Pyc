@@ -8,7 +8,9 @@
   -if image_user_is_current_user?
     = link_to 'Edit', edit_image_path(@image)
     \|
-    = link_to 'Delete', image_path, :method => :delete
+    = link_to 'Stats', statistics_image_path(@image)
+    \|
+    = link_to 'Delete', image_path, method: :delete
   %p
     Posted by:
     = link_to "#{@user.name}", user_path(@image.user_id)
