@@ -17,7 +17,7 @@
   height: 200px;
   width: auto;
   max-width: 500px;
-  padding: 20px;
+  padding: 10px;
   -webkit-transition: all .2s;
   transition: all .2s;
 }
@@ -34,9 +34,9 @@
 }
 
 .home-img img:hover{
-  -webkit-transform:scale(1.5); /*Webkit: Scale up image to 1.2x original size*/
-  -moz-transform:scale(1.5); /*Mozilla scale version*/
-  -o-transform:scale(1.5); /*Opera scale version*/
+  -webkit-transform:scale(1.4); /*Webkit: Scale up image to 1.2x original size*/
+  -moz-transform:scale(1.4); /*Mozilla scale version*/
+  -o-transform:scale(1.4); /*Opera scale version*/
   //box-shadow:0px 0px 30px gray; /*CSS3 shadow: 30px blurred shadow all around image*/
   //-webkit-box-shadow:0px 0px 30px gray; /*Safari shadow version*/
   //-moz-box-shadow:0px 0px 30px gray; /*Mozilla shadow version*/
