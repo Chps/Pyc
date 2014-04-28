@@ -1,5 +1,5 @@
 module StatisticsHelper
-  include UsersHelper
+  include CountryHelper
 
   def visits_line_chart(visits, options)
     visits = visits.to_a
@@ -9,7 +9,7 @@ module StatisticsHelper
     data.new_column('string', 'Date')
     data.new_column('number', 'Visits')
     data.add_rows(visits)
-    
+
     GoogleVisualr::Interactive::LineChart.new(data, options)
   end
 
