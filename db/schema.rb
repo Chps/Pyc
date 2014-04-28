@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140427013606) do
+ActiveRecord::Schema.define(version: 20140428140526) do
 
   create_table "comments", force: true do |t|
     t.string   "content"
@@ -22,16 +22,8 @@ ActiveRecord::Schema.define(version: 20140427013606) do
   end
 
   add_index "comments", ["created_at"], name: "index_comments_on_created_at"
-
-  create_table "hitcounters", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "homes", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+  add_index "comments", ["image_id"], name: "index_comments_on_image_id"
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id"
 
   create_table "images", force: true do |t|
     t.string   "caption"
@@ -65,6 +57,7 @@ ActiveRecord::Schema.define(version: 20140427013606) do
   add_index "impressions", ["controller_name", "action_name", "ip_address"], name: "controlleraction_ip_index"
   add_index "impressions", ["controller_name", "action_name", "request_hash"], name: "controlleraction_request_index"
   add_index "impressions", ["controller_name", "action_name", "session_hash"], name: "controlleraction_session_index"
+  add_index "impressions", ["created_at"], name: "index_impressions_on_created_at"
   add_index "impressions", ["impressionable_type", "impressionable_id", "ip_address"], name: "poly_ip_index"
   add_index "impressions", ["impressionable_type", "impressionable_id", "request_hash"], name: "poly_request_index"
   add_index "impressions", ["impressionable_type", "impressionable_id", "session_hash"], name: "poly_session_index"
@@ -110,6 +103,8 @@ ActiveRecord::Schema.define(version: 20140427013606) do
     t.string   "country"
   end
 
+  add_index "users", ["birthdate"], name: "index_users_on_birthdate"
+  add_index "users", ["country"], name: "index_users_on_country"
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
