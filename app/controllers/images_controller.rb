@@ -1,4 +1,5 @@
 class ImagesController < ApplicationController
+  require 'will_paginate/array'
   include StatisticsHelper
 
   before_action :set_image, except: [:index, :create]
@@ -21,8 +22,7 @@ class ImagesController < ApplicationController
     else
       @images = Image.all
     end
-
-    @images = @images.paginate(page: params[:page], per_page: 10)
+    @images = @images.sort_by!(&:impressionist_count).paginate(page: params[:page], per_page: 10)
   end
 
   # GET /images/1
