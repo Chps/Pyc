@@ -1,5 +1,5 @@
 class Image < ActiveRecord::Base
-  include Stats
+  include StatsModel
 
   def self.search(query)
     where("lower(caption) like ?", "%#{query.downcase}%")
@@ -42,14 +42,15 @@ class Image < ActiveRecord::Base
     self.caption ||= "My Pyc"
   end
 
-  alias_method :super_visits_by_day, :visits_by_day
-  alias_method :super_visits_by_country, :visits_by_country
-
   def visits_by_day
-    super_visits_by_day self
+    daily_visits self
   end
 
   def visits_by_country
-    super_visits_by_country self
+    country_visits self
+  end
+
+  def visits_by_age
+    age_visits self
   end
 end

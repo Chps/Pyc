@@ -24,4 +24,13 @@ module StatisticsHelper
 
     GoogleVisualr::Interactive::PieChart.new(data, options)
   end
+
+  def age_pie_chart(visits, options)
+    data = GoogleVisualr::DataTable.new
+    data.new_column('string', 'Age Group')
+    data.new_column('number', 'Visits')
+    data.add_rows(visits)
+
+    GoogleVisualr::Interactive::PieChart.new(data, options)
+  end
 end

@@ -89,6 +89,7 @@ class ImagesController < ApplicationController
 
     @visits_chart = visits_line_chart(@image.visits_by_day, options)
     @country_pie_chart = country_pie_chart(@image.visits_by_country, options)
+    @age_pie_chart = age_pie_chart(@image.visits_by_age, options)
   end
 
   private

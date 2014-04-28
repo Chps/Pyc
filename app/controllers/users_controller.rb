@@ -1,7 +1,5 @@
 class UsersController < ApplicationController
   include StatisticsHelper
-  include GoogleVisualr
-  include GoogleVisualr::Interactive
 
   impressionist actions: [:show] #, unique: [:session_hash]
 
@@ -20,21 +18,6 @@ class UsersController < ApplicationController
 
     @visits_chart = visits_line_chart(@user.visits_by_day, options)
     @country_pie_chart = country_pie_chart(@user.visits_by_country, options)
-
-    visits_by_age = @user.visits_by_age
-
-    @age_pie_chart = PieChart.new(age_data(visits_by_age), options)
+    @age_pie_chart = age_pie_chart(@user.visits_by_age, options)
   end
-
-  private
-    def country_data(visits)
-    end
-
-    def age_data(visits)
-      data = DataTable.new
-      data.new_column('string', 'Age Group')
-      data.new_column('number', 'Visits')
-      data.add_rows(visits)
-      data
-    end
 end
