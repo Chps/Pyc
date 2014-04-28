@@ -6,3 +6,6 @@
 %h3 Visits this month:
 #visits
   = render_chart @visits_chart, 'visits'
+%h3 Visits by country:
+#visits-by-country
+  = render_chart @country_pie_chart, 'visits-by-country'

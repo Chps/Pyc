@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  include UsersHelper
   include StatisticsHelper
   include GoogleVisualr
   include GoogleVisualr::Interactive
@@ -20,11 +19,7 @@ class UsersController < ApplicationController
     options = { width: 500, height: 200, is3D: true }
 
     @visits_chart = visits_line_chart(@user.visits_by_day, options)
-
-    visits_by_country = @user.visits_by_country.to_a
-    visits_by_country.map! { |a| [country_name(a[0]), a[1]] }
-
-    @country_pie_chart = PieChart.new(country_data(visits_by_country), options)
+    @country_pie_chart = country_pie_chart(@user.visits_by_country, options)
 
     visits_by_age = @user.visits_by_age
 
@@ -33,11 +28,6 @@ class UsersController < ApplicationController
 
   private
     def country_data(visits)
-      data = DataTable.new
-      data.new_column('string', 'Country')
-      data.new_column('number', 'Visits')
-      data.add_rows(visits)
-      data
     end
 
     def age_data(visits)

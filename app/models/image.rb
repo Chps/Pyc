@@ -43,8 +43,13 @@ class Image < ActiveRecord::Base
   end
 
   alias_method :super_visits_by_day, :visits_by_day
+  alias_method :super_visits_by_country, :visits_by_country
 
   def visits_by_day
     super_visits_by_day self
+  end
+
+  def visits_by_country
+    super_visits_by_country self
   end
 end

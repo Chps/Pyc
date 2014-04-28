@@ -88,6 +88,7 @@ class ImagesController < ApplicationController
     options = { width: 500, height: 200, is3D: true }
 
     @visits_chart = visits_line_chart(@image.visits_by_day, options)
+    @country_pie_chart = country_pie_chart(@image.visits_by_country, options)
   end
 
   private

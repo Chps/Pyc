@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   has_many :comments, dependent: :destroy
 
   alias_method :super_visits_by_day, :visits_by_day
+  alias_method :super_visits_by_country, :visits_by_country
 
   def visitors
     impressions.select(:user_id).group(:user_id)
@@ -18,12 +19,7 @@ class User < ActiveRecord::Base
   end
 
   def visits_by_country
-    impressions
-      .joins('INNER JOIN users ON user_id = users.id')
-      .select(:country)
-      .where.not('users.country' => nil, 'users.country' => '')
-      .group(:country)
-      .count
+    super_visits_by_country self
   end
 
   def visits_by_age
