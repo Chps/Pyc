@@ -22,7 +22,7 @@ class ImagesController < ApplicationController
     else
       @images = Image.all
     end
-    @images = @images.sort_by!(&:impressionist_count).paginate(page: params[:page], per_page: 10)
+    @images = @images.sort_by!(&:impressionist_count).reverse.paginate(page: params[:page], per_page: 10)
   end
 
   # GET /images/1
