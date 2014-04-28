@@ -30,7 +30,13 @@ module StatsModel
 
   private
     def age_row(join, label, range)
-      [ label, join.where('users.birthdate' => range).count ]
+      [
+        label,
+        join
+          .where('users.birthdate' => range)
+          .where.not('users.birthdate' => nil)
+          .count
+      ]
     end
 
     def get_age_ranges
