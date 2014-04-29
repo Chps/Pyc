@@ -19,7 +19,18 @@
   }
   img {
     display: inline;
+    -webkit-transform:scale(0.9);
+    -moz-transform:scale(0.9);
+    -o-transform:scale(0.9);
+    -webkit-transition-duration: 0.5s;
+    -moz-transition-duration: 0.5s;
+    -o-transition-duration: 0.5s;
     margin: 10px;
     height: 120px;
+  }
+  img:hover{
+    -webkit-transform:scale(1.4); /*Webkit: Scale up image to 1.4x original size*/
+    -moz-transform:scale(1.4); /*Mozilla scale version*/
+    -o-transform:scale(1.4); /*Opera scale version*/
   }
 }
