@@ -18,31 +18,28 @@
   .home-img {
     display: inline;
     margin: 0px 10px 5px 0px;
-    transition: all .2s;
     -webkit-transform:scale(0.9);
     -moz-transform:scale(0.9);
     -o-transform:scale(0.9);
-    -webkit-transition-duration: 0.5s;
-    -moz-transition-duration: 0.5s;
-    -o-transition-duration: 0.5s;
     img {
       display: inline;
       height: 180px;
       max-width: 500px;
       width: auto;
       padding: 10px;
-      -webkit-transition: all .2s;
+      -webkit-transition-duration: 0.5s;
+      -moz-transition-duration: 0.5s;
+      -o-transition-duration: 0.5s;
+    }
+    img:hover {
+      -webkit-transform:scale(1.4);
+      -moz-transform:scale(1.4);
+      -o-transform:scale(1.4);
     }
     a:hover {
       text-decoration: none;
     }
   }
-}
-
-.home-img img:hover{
-  -webkit-transform:scale(1.4); 
-  -moz-transform:scale(1.4); 
-  -o-transform:scale(1.4); 
 }
 
 .comments {
