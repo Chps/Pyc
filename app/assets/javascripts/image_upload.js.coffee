@@ -1,8 +1,9 @@
 ready = ->
   # For drag and drop
-  $('#global-form').fileupload
+  $('#global-form').fileupload(
     uploadTemplateId: null,
     downloadTemplateId: null,
+    maxNumberOfFiles: 1,
     add: (e, data) ->
       data.submit();
       $('#progress-hull').css('display', 'block')
@@ -11,6 +12,11 @@ ready = ->
       $('#progress-bar').css('width', progress + '%')
     done: (e, data) ->
       window.location = data.result.url + '/edit';
+  ).bind('fileuploadadd', (e, data) ->
+    if data.files.length > 1
+      return false
+    return true
+  )
 
   # For upload button
   $('#upload-btn').click ->
