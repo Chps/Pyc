@@ -29,8 +29,8 @@
     height: 120px;
   }
   img:hover{
-    -webkit-transform:scale(1.4); /*Webkit: Scale up image to 1.4x original size*/
-    -moz-transform:scale(1.4); /*Mozilla scale version*/
-    -o-transform:scale(1.4); /*Opera scale version*/
+    -webkit-transform:scale(1.2); 
+    -moz-transform:scale(1.2); 
+    -o-transform:scale(1.2); 
   }
 }
