@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
     end
 
     def image_user_must_be_current_user
-      redirect_to root_url, :alert => 'Access denied.' unless image_user_is_current_user?
+      redirect_to root_url, alert: 'Access denied.' unless image_user_is_current_user?
     end
 
     def image_user_is_current_user?
