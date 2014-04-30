@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   is_impressionable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  has_many :images
+  has_many :images, dependent: :destroy
   has_many :comments, dependent: :destroy
 
   def visitors
