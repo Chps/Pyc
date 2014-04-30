@@ -12,13 +12,8 @@ module StatsModel
 
   def country_visits(viewable)
     views = viewable.impressions
-    user_visits = views
-                    .joins('INNER JOIN users ON user_id = users.id')
-                    .select(:country)
-                    .where.not('users.country' => nil, 'users.country' => '')
-                    .group(:country)
-                    .count
-    user_visits['Unknown'] = views.where(user_id: nil).count
+    user_visits = get_known_visits_by_country(views)
+    user_visits['Unknown'] = get_unknown_visits_by_country(views)
     user_visits
   end
 
@@ -64,5 +59,22 @@ module StatsModel
         hash[date] = 0
       end
       hash
+    end
+
+    def get_known_visits_by_country(views)
+      views
+        .joins('INNER JOIN users ON user_id = users.id')
+        .select(:country)
+        .where.not('users.country' => nil, 'users.country' => '')
+        .group(:country)
+        .count
+    end
+
+    def get_unknown_visits_by_country(views)
+      visits = views
+                 .joins('INNER JOIN users on user_id = users.id')
+                 .where("users.country IS NULL OR users.country = ''")
+                 .count
+      visits + views.where(user_id: nil).count
     end
 end
