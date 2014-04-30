@@ -7,18 +7,21 @@
   .panel.panel-default
     .panel-heading
       %h4.panel-title
-        %a{:data => {:toggle => "collapse", :parent => "#statistics-accordion"}, :href => "#global-stats"} Global Statistics
+        %a{:data => {:toggle => "collapse", :parent => "#statistics-accordion"}, :href => "#global-stats"} Profile Statistics
     .panel-collapse.collapse.in#global-stats
       .panel-body
         %h3 Visits this month:
-        #visits
-          = render_chart @visits_chart, 'visits'
+        #user-visits
+        = render_chart @user_visits_chart, 'user-visits'
+
         %h3 Visits by country:
-        #visits-by-country
-          = render_chart @country_pie_chart, 'visits-by-country'
+        #user-visits-by-country
+        = render_chart @user_country_chart, 'user-visits-by-country'
+
         %h3 Visits by age:
-        #visits-by-age
-          = render_chart @age_pie_chart, 'visits-by-age'
+        #user-visits-by-age
+        = render_chart @user_age_chart, 'user-visits-by-age'
+
         %h3 Users who have visited this profile:
         = render @user.visitors
 
@@ -28,5 +31,14 @@
         %a{:data => {:toggle => "collapse", :parent => "#statistics-accordion"}, :href => "#image-stats"} Image Statistics
     .panel-collapse.collapse#image-stats
       .panel-body
-        %p Etc
+        %h3 Combined visits this month:
+        #images-visits
+        = render_chart @images_visits_chart, 'images-visits'
 
+        %h3 Combined visits by country:
+        #images-visits-by-country
+        = render_chart @images_country_chart, 'images-visits-by-country'
+
+        %h3 Combined visits by age:
+        #images-visits-by-age
+        = render_chart @images_age_chart, 'images-visits-by-age'

@@ -22,4 +22,28 @@ class User < ActiveRecord::Base
   def visits_by_age
     age_visits self
   end
+
+  def images_visits_by_day
+    hashes = images.map { |img| daily_visits(img) }
+    merge_hashes(hashes)
+  end
+
+  def images_visits_by_country
+    hashes = images.map { |img| country_visits(img) }
+    merge_hashes(hashes)
+  end
+
+  def images_visits_by_age
+    hashes = images.map { |img| age_visits(img) }
+    merge_hashes(hashes)
+  end
+
+  def merge_hashes(hashes)
+    merged = {}
+    hashes.each do |hash|
+      merged.merge!(hash) { |key, old, new| old + new }
+    end
+
+    merged
+  end
 end

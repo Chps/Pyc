@@ -12,9 +12,15 @@ class UsersController < ApplicationController
   def statistics
     options = { width: 500, height: 200, is3D: true }
 
-    @visits_chart = visits_line_chart(@user.visits_by_day, options)
-    @country_pie_chart = country_pie_chart(@user.visits_by_country, options)
-    @age_pie_chart = age_pie_chart(@user.visits_by_age, options)
+    # Profile stats
+    @user_visits_chart = chart_visits(@user.visits_by_day, options)
+    @user_country_chart = chart_countries(@user.visits_by_country, options)
+    @user_age_chart = chart_ages(@user.visits_by_age, options)
+
+    # Combined images stats
+    @images_visits_chart = chart_visits(@user.images_visits_by_day, options)
+    @images_country_chart = chart_countries(@user.images_visits_by_country, options)
+    @images_age_chart = chart_ages(@user.images_visits_by_age, options)
   end
 
   private

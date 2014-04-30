@@ -1,7 +1,7 @@
 module StatisticsHelper
   include CountryHelper
 
-  def visits_line_chart(visits, options)
+  def chart_visits(visits, options)
     visits = visits.to_a
     visits.map! { |a| [a[0].to_date.to_s(:short), a[1]] }
 
@@ -13,7 +13,7 @@ module StatisticsHelper
     GoogleVisualr::Interactive::LineChart.new(data, options)
   end
 
-  def country_pie_chart(visits, options)
+  def chart_countries(visits, options)
     visits = visits.to_a
     visits.map! { |a| [country_name(a[0]), a[1]] }
 
@@ -25,7 +25,9 @@ module StatisticsHelper
     GoogleVisualr::Interactive::PieChart.new(data, options)
   end
 
-  def age_pie_chart(visits, options)
+  def chart_ages(visits, options)
+    visits = visits.to_a
+
     data = GoogleVisualr::DataTable.new
     data.new_column('string', 'Age Group')
     data.new_column('number', 'Visits')
