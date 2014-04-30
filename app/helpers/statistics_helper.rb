@@ -15,7 +15,7 @@ module StatisticsHelper
 
   def chart_countries(visits, options)
     visits = visits.to_a
-    visits.map! { |a| [country_name(a[0]), a[1]] }
+    visits.map! { |a| [country_name(a[0], a[0]), a[1]] }
 
     data = GoogleVisualr::DataTable.new
     data.new_column('string', 'Country')
