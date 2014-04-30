@@ -16,6 +16,7 @@ Pyc::Application.routes.draw do
     end
   end
 
+  resources :ratings, only: [:update]
   resources :comments, only: [:create]
   get '/tags/:tag', to: 'images#index', as: :tag
 

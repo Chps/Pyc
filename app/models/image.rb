@@ -36,7 +36,9 @@ class Image < ActiveRecord::Base
   validates :caption, presence: true
 
   belongs_to :user
+  
   has_many :comments, dependent: :destroy
+  has_many :ratings
 
   def default_values
     self.caption ||= "My Pyc"
@@ -52,5 +54,9 @@ class Image < ActiveRecord::Base
 
   def visits_by_age
     age_visits self
+  end
+
+  def average_rating
+    ratings.sum(:score) / ratings.size
   end
 end

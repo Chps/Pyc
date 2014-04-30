@@ -31,6 +31,9 @@ class ImagesController < ApplicationController
     @user = User.find(@image.user_id)
     @comments = @image.comments.paginate(page: params[:page])
     @comment = Comment.new
+
+    @rating = Rating.where(image_id: @image.id, user_id: current_user.id).first unless @rating
+    @rating = Rating.create(image_id: @image.id, user_id: current_user.id, score: 0)
   end
 
   # GET /images/1/edit

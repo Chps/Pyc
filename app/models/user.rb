@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   has_many :images
+  has_many :ratings
   has_many :comments, dependent: :destroy
 
   def visitors

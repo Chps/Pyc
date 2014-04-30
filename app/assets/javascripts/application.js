@@ -15,4 +15,5 @@
 //= require turbolinks
 //= require bootstrap
 //= require jquery-fileupload
+//= require raty.min.js
 //= require_tree .
