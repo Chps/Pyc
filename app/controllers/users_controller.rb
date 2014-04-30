@@ -20,6 +20,7 @@ class UsersController < ApplicationController
     # Combined images stats
     @images_visits_chart = chart_visits(@user.images_visits_by_day, options)
     @images_country_chart = chart_countries(@user.images_visits_by_country, options)
+    @images_age_chart = chart_ages(@user.images_visits_by_age, options)
   end
 
   private

@@ -26,6 +26,8 @@ module StatisticsHelper
   end
 
   def chart_ages(visits, options)
+    visits = visits.to_a
+
     data = GoogleVisualr::DataTable.new
     data.new_column('string', 'Age Group')
     data.new_column('number', 'Visits')

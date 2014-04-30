@@ -20,23 +20,21 @@ module StatsModel
     join = viewable.impressions.joins("INNER JOIN users ON user_id = users.id")
     labels = %w[ <13 13-17 18-24 25-34 35-44 45-54 55-64 >65 ]
     ranges = get_age_ranges
-    ages = []
-    (0..labels.length).each do |i|
-      ages << age_row(join, labels[i], ranges[i])
+    ages = {}
+
+    (0...labels.length).each do |i|
+      ages[labels[i]] = age_count(join, ranges[i])
     end
 
     ages
   end
 
   private
-    def age_row(join, label, range)
-      [
-        label,
-        join
-          .where('users.birthdate' => range)
-          .where.not('users.birthdate' => nil)
-          .count
-      ]
+    def age_count(join, range)
+      join
+        .where('users.birthdate' => range)
+        .where.not('users.birthdate' => nil)
+        .count
     end
 
     def get_age_ranges

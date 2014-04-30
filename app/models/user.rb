@@ -33,6 +33,11 @@ class User < ActiveRecord::Base
     merge_hashes(hashes)
   end
 
+  def images_visits_by_age
+    hashes = images.map { |img| age_visits(img) }
+    merge_hashes(hashes)
+  end
+
   def merge_hashes(hashes)
     merged = {}
     hashes.each do |hash|
