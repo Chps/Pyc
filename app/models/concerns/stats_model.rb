@@ -11,13 +11,15 @@ module StatsModel
   end
 
   def country_visits(viewable)
-    viewable
-      .impressions
-      .joins('INNER JOIN users ON user_id = users.id')
-      .select(:country)
-      .where.not('users.country' => nil, 'users.country' => '')
-      .group(:country)
-      .count
+    views = viewable.impressions
+    user_visits = views
+                    .joins('INNER JOIN users ON user_id = users.id')
+                    .select(:country)
+                    .where.not('users.country' => nil, 'users.country' => '')
+                    .group(:country)
+                    .count
+    user_visits['Unknown'] = views.where(user_id: nil).count
+    user_visits
   end
 
   def age_visits(viewable)
