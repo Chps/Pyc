@@ -12,13 +12,15 @@ module StatsModel
 
   def country_visits(viewable)
     views = viewable.impressions
-    user_visits = get_known_visits_by_country(views)
-    user_visits['Unknown'] = get_unknown_visits_by_country(views)
+    join = views.joins('INNER JOIN users ON user_id = users.id')
+    user_visits = get_known_country_visits(join)
+    user_visits['Unknown'] = get_unknown_country_visits(views, join)
     user_visits
   end
 
   def age_visits(viewable)
-    join = viewable.impressions.joins("INNER JOIN users ON user_id = users.id")
+    views = viewable.impressions
+    join = views.joins("INNER JOIN users ON user_id = users.id")
     labels = %w[ <13 13-17 18-24 25-34 35-44 45-54 55-64 >65 ]
     ranges = get_age_ranges
     ages = {}
@@ -27,6 +29,7 @@ module StatsModel
       ages[labels[i]] = age_count(join, ranges[i])
     end
 
+    ages['Unknown'] = get_unknown_age_visits(views, join)
     ages
   end
 
@@ -61,20 +64,24 @@ module StatsModel
       hash
     end
 
-    def get_known_visits_by_country(views)
-      views
-        .joins('INNER JOIN users ON user_id = users.id')
+    def get_known_country_visits(joined)
+      joined
         .select(:country)
         .where.not('users.country' => nil, 'users.country' => '')
         .group(:country)
         .count
     end
 
-    def get_unknown_visits_by_country(views)
-      visits = views
-                 .joins('INNER JOIN users on user_id = users.id')
-                 .where("users.country IS NULL OR users.country = ''")
-                 .count
-      visits + views.where(user_id: nil).count
+    def get_unknown_country_visits(views, join)
+      country = 'users.country'
+      join.where(country => nil, country => '').count + get_unknown_count(views)
+    end
+
+    def get_unknown_age_visits(views, join)
+      join.where('users.birthdate IS NULL').count + get_unknown_count(views)
+    end
+
+    def get_unknown_count(views)
+      views.where(user_id: nil).count
     end
 end
