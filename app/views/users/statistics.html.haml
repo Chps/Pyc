@@ -34,3 +34,7 @@
         %h3 Combined visits this month:
         #images-visits
         = render_chart @images_visits_chart, 'images-visits'
+
+        %h3 Combined visits by country:
+        #images-visits-by-country
+        = render_chart @images_country_chart, 'images-visits-by-country'
