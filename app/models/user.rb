@@ -38,12 +38,13 @@ class User < ActiveRecord::Base
     merge_hashes(hashes)
   end
 
-  def merge_hashes(hashes)
-    merged = {}
-    hashes.each do |hash|
-      merged.merge!(hash) { |key, old, new| old + new }
-    end
+  private
+    def merge_hashes(hashes)
+      merged = {}
+      hashes.each do |hash|
+        merged.merge!(hash) { |key, old, new| old + new }
+      end
 
-    merged
-  end
+      merged
+    end
 end

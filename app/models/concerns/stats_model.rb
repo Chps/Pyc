@@ -2,8 +2,12 @@ module StatsModel
   extend ActiveSupport::Concern
 
   def daily_visits(viewable)
+    all_days = get_days_hash
     created_at = 'DATE(created_at)'
-    viewable.impressions.select(created_at).group(created_at).order(created_at).count
+    visits = viewable.impressions.select(created_at)
+              .where(created_at: 30.days.ago..Time.now).group(created_at)
+              .order(created_at).count
+    all_days.merge(visits)
   end
 
   def country_visits(viewable)
@@ -48,5 +52,15 @@ module StatsModel
         64.years.ago..54.years.ago,
         90.years.ago..64.years.ago
       ]
+    end
+
+    def get_days_hash
+      hash = {}
+      30.downto(0).each do |i|
+        # same date format as Rails uses for storing dates
+        date = i.days.ago.to_date.strftime
+        hash[date] = 0
+      end
+      hash
     end
 end
