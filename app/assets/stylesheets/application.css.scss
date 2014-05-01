@@ -19,3 +19,10 @@
 #progress-hull {
   display: none;
 }
+
+#account-dropdown {
+  display: inline-block;
+  font-size: 18px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

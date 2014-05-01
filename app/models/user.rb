@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
   has_many :images, dependent: :destroy
   has_many :comments, dependent: :destroy
 
+  validates :name, length: { maximum: 30 }
+
   def visitors
     impressions.select(:user_id).group(:user_id)
   end
