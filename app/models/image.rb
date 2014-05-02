@@ -11,6 +11,7 @@ class Image < ActiveRecord::Base
 
   has_attached_file :content,
     path: ":hash.:extension",
+    :bucket => ENV['S3_BUCKET_NAME'],
     hash_secret: "1ae8a70b-d9af-4359-a155-ffeccb95482f",
     styles: { medium: "300x300>", thumb: "100x100>" }
 
