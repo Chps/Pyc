@@ -4,9 +4,11 @@ class User < ActiveRecord::Base
   is_impressionable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  has_many :images
+  has_many :images, dependent: :destroy
   has_many :ratings
   has_many :comments, dependent: :destroy
+
+  validates :name, length: { maximum: 30 }
 
   def visitors
     impressions.select(:user_id).group(:user_id)
@@ -39,12 +41,13 @@ class User < ActiveRecord::Base
     merge_hashes(hashes)
   end
 
-  def merge_hashes(hashes)
-    merged = {}
-    hashes.each do |hash|
-      merged.merge!(hash) { |key, old, new| old + new }
-    end
+  private
+    def merge_hashes(hashes)
+      merged = {}
+      hashes.each do |hash|
+        merged.merge!(hash) { |key, old, new| old + new }
+      end
 
-    merged
-  end
+      merged
+    end
 end

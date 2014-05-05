@@ -23,6 +23,7 @@ gem 'binding_of_caller'
 gem 'jquery-fileupload-rails'
 gem 'google_visualr'
 gem 'carmen-rails'
+gem 'aws-sdk'
 
 group :development do
   gem 'sqlite3'
