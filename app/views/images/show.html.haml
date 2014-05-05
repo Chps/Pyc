@@ -6,7 +6,7 @@
     %b Tags:
     = render partial: 'tag', collection: @image.tag_list
   %p
-    Average Rating (#{pluralize(@image.ratings.length, "vote")})
+    Average Rating
     #star.ratings
   -if user_signed_in?
     %p
