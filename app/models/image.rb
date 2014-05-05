@@ -25,7 +25,7 @@ class Image < ActiveRecord::Base
   belongs_to :user
   
   has_many :comments, dependent: :destroy
-  has_many :ratings
+  has_many :ratings, dependent: :destroy
 
   def default_values
     self.caption ||= "My Pyc"
