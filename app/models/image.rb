@@ -44,7 +44,8 @@ class Image < ActiveRecord::Base
   end
 
   def average_rating
-    return 0 if ratings.empty?
-    ratings.sum(:score) / ratings.size
+    return 0 if ratings.empty? or ratings.map{|r| r.score}.uniq == [0]
+    valid_ratings = ratings.map{|r| r.score}.reject{|r| r == 0}
+    valid_ratings.inject{|sum,x| sum + x } / valid_ratings.size
   end
 end
