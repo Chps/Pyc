@@ -56,6 +56,11 @@
             data: { score: score }
           }).done(function(data) {
             console.log("res", data);
+              $('#star').raty({
+                score: data,
+                readOnly: true,
+                path: '/assets'
+              })
           })
         }
       });
