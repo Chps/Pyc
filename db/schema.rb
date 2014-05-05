@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140428140526) do
+ActiveRecord::Schema.define(version: 20140430142845) do
 
   create_table "comments", force: true do |t|
     t.string   "content"
@@ -63,6 +63,17 @@ ActiveRecord::Schema.define(version: 20140428140526) do
   add_index "impressions", ["impressionable_type", "impressionable_id", "session_hash"], name: "poly_session_index"
   add_index "impressions", ["impressionable_type", "message", "impressionable_id"], name: "impressionable_type_message_index"
   add_index "impressions", ["user_id"], name: "index_impressions_on_user_id"
+
+  create_table "ratings", force: true do |t|
+    t.integer  "image_id"
+    t.integer  "user_id"
+    t.integer  "score",      default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "ratings", ["image_id"], name: "index_ratings_on_image_id"
+  add_index "ratings", ["user_id"], name: "index_ratings_on_user_id"
 
   create_table "taggings", force: true do |t|
     t.integer  "tag_id"

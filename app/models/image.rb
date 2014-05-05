@@ -23,7 +23,9 @@ class Image < ActiveRecord::Base
   validates :caption, presence: true
 
   belongs_to :user
+  
   has_many :comments, dependent: :destroy
+  has_many :ratings, dependent: :destroy
 
   def default_values
     self.caption ||= "My Pyc"
@@ -39,5 +41,11 @@ class Image < ActiveRecord::Base
 
   def visits_by_age
     age_visits self
+  end
+
+  def average_rating
+    return 0 if ratings.empty? or ratings.map{|r| r.score}.uniq == [0]
+    valid_ratings = ratings.map{|r| r.score}.reject{|r| r == 0}
+    valid_ratings.inject{|sum,x| sum + x } / valid_ratings.size.to_f
   end
 end

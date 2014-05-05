@@ -5,6 +5,13 @@
   %p
     %b Tags:
     = render partial: 'tag', collection: @image.tag_list
+  %p
+    Average Rating
+    #star.ratings
+  -if user_signed_in?
+    %p
+      Your Rating
+      #user_star.ratings
   -if image_user_is_current_user?
     = link_to 'Edit', edit_image_path(@image)
     \|
@@ -26,3 +33,35 @@
     %ol.comments
       = render @comments, image_page: true
     = will_paginate @comments
+
+:javascript
+  $(function() {
+    $('#star').raty({
+      readOnly: true,
+      score: #{@image.average_rating},
+      path: '/assets'
+    });
+  })
+-if user_signed_in?
+  :javascript
+    $(function() {
+      $('#user_star').raty({
+        score: #{@rating.score},
+        path: '/assets',
+        click: function(score, evt) {
+          console.log('sending score ', score)
+          $.ajax({
+            url: '/ratings/' + #{@rating.id},
+            type: 'PATCH',
+            data: { score: score }
+          }).done(function(data) {
+            console.log("res", data);
+              $('#star').raty({
+                score: data,
+                readOnly: true,
+                path: '/assets'
+              })
+          })
+        }
+      });
+    })

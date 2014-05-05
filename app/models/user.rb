@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   has_many :images, dependent: :destroy
+  has_many :ratings, dependent: :destroy
   has_many :comments, dependent: :destroy
 
   validates :name, length: { maximum: 30 }
