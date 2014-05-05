@@ -44,6 +44,7 @@ class Image < ActiveRecord::Base
   end
 
   def average_rating
+    return 0 if ratings.empty?
     ratings.sum(:score) / ratings.size
   end
 end
