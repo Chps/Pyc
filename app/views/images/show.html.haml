@@ -54,7 +54,9 @@
             url: '/ratings/' + #{@rating.id},
             type: 'PATCH',
             data: { score: score }
-          }).done(console.log);
+          }).done(function(data) {
+            console.log("res", data);
+          })
         }
       });
     })
