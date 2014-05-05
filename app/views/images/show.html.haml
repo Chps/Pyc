@@ -8,9 +8,10 @@
   %p
     Average Rating (#{pluralize(@image.ratings.length, "vote")})
     #star.ratings
-  %p
-    Your Rating
-    #user_star.ratings
+  -if user_signed_in?
+    %p
+      Your Rating
+      #user_star.ratings
   -if image_user_is_current_user?
     = link_to 'Edit', edit_image_path(@image)
     \|
@@ -32,6 +33,7 @@
     %ol.comments
       = render @comments, image_page: true
     = will_paginate @comments
+
 :javascript
   $(function() {
     $('#star').raty({
@@ -39,16 +41,20 @@
       score: #{@image.average_rating},
       path: '/assets'
     });
-    $('#user_star').raty({
-      score: #{@rating.score},
-      path: '/assets',
-      click: function(score, evt) {
-        console.log('sending score ', score)
-        $.ajax({
-          url: '/ratings/' + #{@rating.id},
-          type: 'PATCH',
-          data: { score: score }
-        }).done(console.log);
-      }
-    });
   })
+-if user_signed_in?
+  :javascript
+    $(function() {
+      $('#user_star').raty({
+        score: #{@rating.score},
+        path: '/assets',
+        click: function(score, evt) {
+          console.log('sending score ', score)
+          $.ajax({
+            url: '/ratings/' + #{@rating.id},
+            type: 'PATCH',
+            data: { score: score }
+          }).done(console.log);
+        }
+      });
+    })
