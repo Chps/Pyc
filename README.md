@@ -10,6 +10,8 @@ To install Ruby, choose one of the installation methods on [this website](https:
 
 To install Rails, visit [this informative page](http://guides.rubyonrails.org/getting_started.html) to get started.
 
+In order to upload images, [imagemagick](http://www.imagemagick.org/) must be installed.
+
 Lastly, to get Pyc running locally follow these steps:
 
 1. Navigate to the project directory for Pyc
